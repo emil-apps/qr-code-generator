@@ -2,6 +2,43 @@ html{
     margin: 0;
     overflow: hidden;
     font-family: "Lato", sans-serif;
+    user-select: none;
+    background-color: black;
+    transition: 0.2s;
+}
+
+body.loading::before{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    content: "Loading...";
+    font-family: inherit;
+    font-size: x-large;
+    color: white;
+
+    transform: translate(-50%, -50%);
+}
+
+body.loading *{
+    display: none;
+}
+
+@media print
+{
+    .background { display: none !important }
+
+    .container {
+        box-shadow: none !important;
+    }
+
+    .container input{
+        display: none !important;
+    }
+
+    .bg-selection{
+        display: none !important;
+    }
 }
 
 img { -webkit-user-drag: none;}
@@ -88,7 +125,6 @@ body:hover .bg-selection{
     transition: 0.3s;
 }
 
-.bg-selection img.selected,
 .bg-selection img:hover{
     transform: scale(1.15);
 }
@@ -123,4 +159,107 @@ body:hover .bg-selection{
 }
 #context-menu button:hover{
     background-color: lightgray;
+}
+
+#dlg-parent{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 4;
+
+    transition: 0.3s;
+    opacity: 1;
+}
+
+#dlg-parent.hidden{
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#dlg-parent div.dlg-content{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    padding: 16px;
+    background-color: white;
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+
+    opacity: 1;
+
+    transition: 0.2s;
+}
+
+#dlg-parent.hidden div.dlg-content{
+    opacity: 0;
+    top: 55%;
+}
+
+#dlg-parent div.dlg-content.hidden{
+    display: none;
+}
+
+#imgSize_lbl{
+    margin-left: 12px;
+}
+
+#dlg-img-size button{
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: large;
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    transition: 0.2s;
+}
+
+#dlg-img-size button:hover{
+    background-color: rgb(19, 87, 155);
+}
+
+#dlg-img-size button:active{
+    transform: scale(0.96);
+}
+
+input[type=range] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: lightgray;
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    background-color: dodgerblue;
+    cursor: pointer;
 }

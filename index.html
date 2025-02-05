@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato">
     <link rel="stylesheet" href="style.css">
+    <script src="loading-screen.js"></script>
     <script defer src="app.js"></script>
     <title>QR Code Generator</title>
 </head>
-<body>
+<body class="loading">
+    <div id="dlg-parent" class="hidden">
+        <div class="dlg-content hidden" id="dlg-img-size">
+            <span style="font-size: x-large;font-weight: bold;">Change image size</span>
+            <span>Drag the slider to change the size of the QR code.</span>
+            <br>
+            <input type="range" min="10" max="500" id="imgSize_slider" />
+            <br>
+            <div>
+                <button onclick="closeDialog()">Back</button>
+                <span id="imgSize_lbl"></span>
+            </div>
+        </div>
+        <div class="dlg-content hidden" id="dlg-about"></div>
+    </div>
+
     <div id="context-menu">
-        <button>Change image size</button>
-        <button>About QR Code Generator</button>
+        <button id="ctx-image-size">Change image size</button>
+        <button id="ctx-print">Print</button>
+        <button id="ctx-about">About QR Code Generator</button>
     </div>
 
     <div class="background"></div>
@@ -22,9 +39,11 @@
     </div>
 
     <div class="bg-selection">
-        <img id="img1" class="selected" src="https://plus.unsplash.com/premium_photo-1675355675464-2deabb1f893b" />
+        <img id="img1" src="https://plus.unsplash.com/premium_photo-1675355675464-2deabb1f893b" />
         <img id="img2" src="https://images.unsplash.com/photo-1476673160081-cf065607f449" />
         <img id="img3" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" />
+        <img id="img4" src="https://images.unsplash.com/photo-1513346940221-6f673d962e97" />
+        <img id="img5" src="https://images.unsplash.com/photo-1587057870760-58d0a7014e5d" />
     </div>
 </body>
 </html>
