@@ -92,7 +92,7 @@ input[type=text]{
 }
 
 body:hover .bg-selection{
-    bottom: 5%;
+    bottom: 3%;
     opacity: 1;
 }
 
@@ -100,10 +100,8 @@ body:hover .bg-selection{
     z-index: 2;
 
     position: fixed;
-    bottom: -5%;
-    left: 10%;
+    bottom: -3%;
     opacity: 0;
-    transform: translate(-10%);
     transition: 0.3s;
 
     display: flex;
@@ -118,8 +116,8 @@ body:hover .bg-selection{
     margin-left: 12px;
     margin-right: 12px;
 
-    width: 8%;
-    height: 8%;
+    width: 5%;
+    height: 5%;
     cursor: pointer;
 
     transition: 0.3s;
