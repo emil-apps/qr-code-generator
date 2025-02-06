@@ -26,6 +26,8 @@ body.loading *{
 
 @media print
 {
+    body{background-color: white !important;}
+
     .background { display: none !important }
 
     .container {
@@ -44,7 +46,7 @@ body.loading *{
 img { -webkit-user-drag: none;}
 
 .background{
-    background-image: url("https://plus.unsplash.com/premium_photo-1675355675464-2deabb1f893b");
+    background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -159,6 +161,11 @@ body:hover .bg-selection{
     background-color: lightgray;
 }
 
+#context-menu button[disabled]:hover{
+    cursor: not-allowed;
+    background-color: inherit;
+}
+
 #dlg-parent{
     position: fixed;
     top: 0;
@@ -215,7 +222,7 @@ body:hover .bg-selection{
     margin-left: 12px;
 }
 
-#dlg-img-size button{
+#dlg-parent button{
     outline: none;
     border: 1px solid transparent;
     border-radius: 5px;
@@ -229,11 +236,11 @@ body:hover .bg-selection{
     transition: 0.2s;
 }
 
-#dlg-img-size button:hover{
+#dlg-parent button:hover{
     background-color: rgb(19, 87, 155);
 }
 
-#dlg-img-size button:active{
+#dlg-parent button:active{
     transform: scale(0.96);
 }
 
@@ -260,4 +267,16 @@ input[type=range]::-moz-range-thumb{
     border-radius: 50%;
     background-color: dodgerblue;
     cursor: pointer;
+}
+
+.dlg-title{
+    font-size: x-large;font-weight: bold;
+}
+
+a,a:visited{
+    color: dodgerblue;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
