@@ -33,13 +33,6 @@ document.addEventListener("contextmenu", (e)=>{
     ctxMenu.style.display = "flex";
 });
 
-for(let i = 1;i< document.getElementsByClassName("bg-selection")[0].childNodes.length ;i++)
-{
-    document.getElementsByClassName("bg-selection")[0].childNodes[i].addEventListener("click", ()=>{
-        document.getElementsByClassName("background")[0].style.backgroundImage = "url('"+document.getElementById("img"+i).src+"')";
-    });
-}
-
 document.getElementById("ctx-image-size").addEventListener("click", ()=>{
    dialogParent.classList.remove("hidden");
 
@@ -65,6 +58,11 @@ imgSize_slider.addEventListener("mousemove", ()=>{
 
     inputField.dispatchEvent(new Event("change"));
 });
+
+function changeImg(url)
+{
+    document.getElementsByClassName("background")[0].style.backgroundImage = "url('"+url.src+"')";
+}
 
 function closeDialog()
 {
