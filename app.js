@@ -36,6 +36,7 @@ btnDownload.addEventListener("click", ()=>{
 
     var link = document.createElement("a");
     link.target="_blank";
+    link.download = true;
     link.href = outputBox.childNodes[1].src;
     link.click();
 });
