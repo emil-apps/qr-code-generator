@@ -1,75 +1,22 @@
-html{
-    margin: 0;
-    overflow: hidden;
-    font-family: "Lato", sans-serif;
+html { margin: 0 }
+
+@media print{
+    input, .scale-panel, .container div.child { display: none !important }
+
+    div.credits{
+        display: block !important;
+    }
+}
+
+body{
     user-select: none;
-    background-color: black;
-    transition: 0.2s;
-}
-
-body.loading::before{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-
-    content: "Loading...";
-    font-family: inherit;
-    font-size: x-large;
-    color: white;
-
-    transform: translate(-50%, -50%);
-}
-
-body.loading *{
-    display: none;
-}
-
-@media print
-{
-    body{background-color: white !important;}
-
-    .background { display: none !important }
-
-    .container {
-        box-shadow: none !important;
-    }
-
-    .container input{
-        display: none !important;
-    }
-
-    .bg-selection{
-        display: none !important;
-    }
-}
-
-img { -webkit-user-drag: none;}
-
-.background{
-    background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    filter: blur(5px);
-
-    z-index: 1;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: larger;
+    background-color: white;
+    color: black;
 }
 
 .container{
-    z-index: 2;
-
-    background-color: white;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    padding: 24px;
-
     position: fixed;
     top: 50%;
     left: 50%;
@@ -78,205 +25,93 @@ img { -webkit-user-drag: none;}
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.container div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input[type=color]{
+    -webkit-appearance: none;
+    appearance: none;
+
+    outline: none;
+    border: none;
+    width: 30px;
+    background-color: transparent;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type=color]::-webkit-color-swatch {
+	border: none;
+    border-radius: 30px;
 }
 
 input[type=text]{
-    outline: none;
-    border: 1px solid transparent;
-    border-radius: 0px;
-    border-bottom: 1px solid gray;
     font-family: inherit;
-    font-size: large;
+    font-size: inherit;
+
+    outline: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 12px;
+
     text-align: center;
-    color: black;
 }
 
-body:hover .bg-selection{
-    bottom: 3%;
-    opacity: 1;
+input[type=text]:focus{
+    border-color: dodgerblue;
 }
 
-.bg-selection{
-    z-index: 2;
-
+.scale-panel{
+    background-color: white;
     position: fixed;
-    bottom: -3%;
-    opacity: 0;
-    transition: 0.3s;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 0px 4px lightgray;
+    border-radius: 5px;
+    padding: 12px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.bg-selection img{
-    border: 1px solid transparent;
-    border-radius: 5px;
-
-    margin-left: 12px;
-    margin-right: 12px;
-
-    width: 5%;
-    height: 5%;
-    cursor: pointer;
-
-    transition: 0.3s;
+.scale-panel input{
+    margin: 0px 15px;
 }
 
-.bg-selection img:hover{
-    transform: scale(1.15);
-}
-
-#context-menu{
-    z-index: 3;
-
+.credits{
     position: fixed;
-    top: 0;
-    left: 0;
-
-    background-color: white;
-
-    border: 1px solid transparent;
-    border-radius: 6px;
-
-    display: none;
-    flex-direction: column;
-
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-#context-menu button{
-    text-align: left;
-    font-family: inherit;
-    font-size: inherit;
-    background-color: inherit;
-    outline: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    padding: 4px;
-    transition: 0.15s;
-}
-#context-menu button:hover{
-    background-color: lightgray;
-}
-
-#context-menu button[disabled]:hover{
-    cursor: not-allowed;
-    background-color: inherit;
-}
-
-#dlg-parent{
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 4;
-
-    transition: 0.3s;
-    opacity: 1;
-}
-
-#dlg-parent.hidden{
-    z-index: 0;
-    opacity: 0;
-    pointer-events: none;
-}
-
-#dlg-parent div.dlg-content{
-    position: fixed;
-    top: 50%;
     left: 50%;
-
-    padding: 16px;
-    background-color: white;
-
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-    border: 1px solid transparent;
-    border-radius: 5px;
-
+    font-size: small;
+    font-family: sans-serif;
     transform: translate(-50%, -50%);
+    bottom: 10px;
+    color: gray;
 
-    display: flex;
-    flex-direction: column;
-
-    opacity: 1;
-
-    transition: 0.2s;
-}
-
-#dlg-parent.hidden div.dlg-content{
-    opacity: 0;
-    top: 55%;
-}
-
-#dlg-parent div.dlg-content.hidden{
     display: none;
 }
 
-#imgSize_lbl{
-    margin-left: 12px;
-}
-
-#dlg-parent button{
-    outline: none;
+#download-btn{
     border: 1px solid transparent;
     border-radius: 5px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: large;
-    background-color: dodgerblue;
-    color: white;
-    font-weight: bold;
-    padding: 6px 12px;
-    transition: 0.2s;
+    padding: 4px;
+    width: 30px;
+    -webkit-user-drag: none;
 }
 
-#dlg-parent button:hover{
-    background-color: rgb(19, 87, 155);
-}
-
-#dlg-parent button:active{
-    transform: scale(0.96);
-}
-
-input[type=range] {
-    appearance: none;
-    -webkit-appearance: none;
-
-    width: 100%;
-    height: 15px;
-    border: 1px solid transparent;
-    border-radius: 5px;
+#download-btn:hover{
     background-color: lightgray;
-    outline: none;
 }
 
-input[type=range]::-webkit-slider-thumb,
-input[type=range]::-moz-range-thumb{
-    -webkit-appearance: none;
-    appearance: none;
-
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-    background-color: dodgerblue;
-    cursor: pointer;
-}
-
-.dlg-title{
-    font-size: x-large;font-weight: bold;
-}
-
-a,a:visited{
-    color: dodgerblue;
-    text-decoration: none;
-}
-a:hover{
-    text-decoration: underline;
+#download-btn:active{
+    background-color: #ccc;
 }
