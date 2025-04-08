@@ -3,62 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato">
+    <title>QR Code Generator | emil.apps</title>
     <link rel="stylesheet" href="style.css">
-    <script src="loading-screen.js"></script>
-    <script defer src="app.js"></script>
-    <title>QR Code Generator</title>
+    <script src="qrcode.js"></script>
+    <script src="app.js" defer></script>
 </head>
-<body class="loading">
-    <div id="dlg-parent" class="hidden">
-        <div class="dlg-content hidden" id="dlg-img-size">
-            <span class="dlg-title">Change image size</span>
-            <span>Drag the slider to change the size of the QR code.</span>
-            <br>
-            <input type="range" min="10" max="500" id="imgSize_slider" />
-            <br>
-            <div>
-                <button onclick="closeDialog()">Back</button>
-                <span id="imgSize_lbl"></span>
-            </div>
-        </div>
-        <div class="dlg-content hidden" id="dlg-about">
-            <span class="dlg-title">About QR Code Generator</span>
-            <span>Version 1.0.0.2<br>
-            &copy; 2025 emil.apps<br>
-            <br>
-            <b>Images:</b> <a target="_blank" href="http://www.unsplash.com">Unsplash</a><br>
-            <b>Font:</b> <a target="_blank" href="http://fonts.google.com">Google Fonts</a><br>
-            <b>Source:</b> on <a target="_blank" href="http://github.com/emil-apps/qr-code-generator">GitHub</a>
-            </span><br>
-            <div>
-                <button onclick="closeDialog()">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="context-menu">
-        <button id="ctx-image-size">Change image size</button>
-        <button id="ctx-print" disabled>Print</button>
-        <button id="ctx-about">About QR Code Generator</button>
-    </div>
-
-    <div class="background"></div>
-
+<body>
     <div class="container">
-        <img id="result" />
-        <input id="source" autocomplete="off" spellcheck="false" type="text" autofocus placeholder="Text or URL"  />
+        <div id="outputBox"></div>
+        <div class="child">
+            <input id="inputBox" type="text" spellcheck="false" autocomplete="off" placeholder="Text or URL" autofocus>
+            <input id="inputColor" type="color" value="#1e90ff">
+            <img id="download-btn" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDBweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSI0MHB4IiBmaWxsPSIjMDAwMDAwIj48cGF0aCBkPSJNNDgwLTMxNS4zMyAyODQuNjctNTEwLjY3bDQ3LjMzLTQ4TDQ0Ni42Ny00NDR2LTM1Nmg2Ni42NnYzNTZMNjI4LTU1OC42N2w0Ny4zMyA0OEw0ODAtMzE1LjMzWk0yMjYuNjctMTYwcS0yNyAwLTQ2Ljg0LTE5LjgzUTE2MC0xOTkuNjcgMTYwLTIyNi42N1YtMzYyaDY2LjY3djEzNS4zM2g1MDYuNjZWLTM2Mkg4MDB2MTM1LjMzcTAgMjctMTkuODMgNDYuODRRNzYwLjMzLTE2MCA3MzMuMzMtMTYwSDIyNi42N1oiLz48L3N2Zz4=" />
+        </div>
     </div>
 
-    <div class="bg-selection">
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1476673160081-cf065607f449" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1513346940221-6f673d962e97" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1587057870760-58d0a7014e5d" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1581262177000-8139a463e531" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1601053136267-40e742b4b21a" />
-        <img onclick="changeImg(this)" src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7" />
+    <div class="scale-panel">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDBweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSI0MHB4IiBmaWxsPSIjMDAwMDAwIj48cGF0aCBkPSJNNzkyLTEyMC42NyA1MzIuNjctMzgwcS0zMCAyNS4zMy02OS42NCAzOS42N1E0MjMuMzktMzI2IDM3OC42Ny0zMjZxLTEwOC40NCAwLTE4My41Ni03NS4xN1ExMjAtNDc2LjMzIDEyMC01ODMuMzN0NzUuMTctMTgyLjE3cTc1LjE2LTc1LjE3IDE4Mi41LTc1LjE3IDEwNy4zMyAwIDE4Mi4xNiA3NS4xNyA3NC44NCA3NS4xNyA3NC44NCAxODIuMjcgMCA0My4yMy0xNCA4Mi45LTE0IDM5LjY2LTQwLjY3IDczbDI2MCAyNTguNjYtNDggNDhabS00MTQtMjcycTc5LjE3IDAgMTM0LjU4LTU1LjgzUTU2OC01MDQuMzMgNTY4LTU4My4zM3EwLTc5LTU1LjQyLTEzNC44NFE0NTcuMTctNzc0IDM3OC03NzRxLTc5LjcyIDAtMTM1LjUzIDU1LjgzLTU1LjggNTUuODQtNTUuOCAxMzQuODR0NTUuOCAxMzQuODNxNTUuODEgNTUuODMgMTM1LjUzIDU1LjgzWm0tMzQtNzYuNjZ2LTgxLjM0aC04MS4zM3YtNjYuNjZIMzQ0Vi02OThoNjYuNjd2ODAuNjdoODAuNjZ2NjYuNjZoLTgwLjY2djgxLjM0SDM0NFoiLz48L3N2Zz4=">
+        <input type="range" min="1" max="10" step="1" value="2" id="scale-changer">
+        <span id="scale-factor">200px</span>
     </div>
+
+    <div class="credits">Created using QR Code Generator from emil.apps (http://emil-apps.github.io/qr-code-generator)</div>
 </body>
 </html>
