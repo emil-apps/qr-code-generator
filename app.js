@@ -3,8 +3,10 @@ var outputBox = document.getElementById("outputBox");
 var scaleChanger = document.getElementById("scale-changer");
 var colorChooser = document.getElementById("inputColor");
 var btnDownload = document.getElementById("download-btn");
+var scaleFactorLbl = document.getElementById("scale-factor");
 
 scaleChanger.addEventListener("change", ()=>{
+    scaleFactorLbl.innerHTML = (scaleChanger.value*100)+"px";
     inputBox.dispatchEvent(new Event("keyup"));
 });
 colorChooser.addEventListener("input", ()=>{
