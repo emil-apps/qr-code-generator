@@ -104,7 +104,8 @@ input[type=text]:focus{
     display: none;
 }
 
-#download-btn{
+#download-btn,
+#print-btn{
     border: 1px solid transparent;
     border-radius: 5px;
     padding: 4px;
@@ -112,7 +113,8 @@ input[type=text]:focus{
     -webkit-user-drag: none;
 }
 
-#download-btn:hover{
+#download-btn:hover,
+#print-btn:hover{
     background-color: lightgray;
 }
 
